@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8.0.31
+    ports:
+      - "3306:3306"
+    container_name: bdmysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "sup"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "admin_123"
+      MYSQL_DATABASE: "truebeauty"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./mysql-dump/bdEstetica.sql:/docker-entrypoint-initdb.d/bdEstetica.sql
+    networks:
+      mysql_network:
+        aliases:
+          - mysql_host
+  postgres:
+    container_name: bdpostgress
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: "admin1"
+      POSTGRES_PASSWORD: "admin_123"
+      POSTGRES_DB: "truebeauty"
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./postgress-dump/bdEstetica2.sql:/docker-entrypoint-initdb.d/bdEstetica2.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+networks:
+  mysql_network:
+    name: mysql_net
+  postgres:
+    name: post_net
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local
+  postgres:
+    driver: local
