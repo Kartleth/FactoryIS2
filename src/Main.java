@@ -20,6 +20,7 @@ public class Main {
         }catch(Exception e){
             System.out.println(e.toString());
         }
+        database.queryInsert("INSERT INTO tabla1 VALUES(9939438)");
         database.closeConnection();
         database2.closeConnection();
 

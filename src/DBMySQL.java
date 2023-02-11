@@ -20,7 +20,7 @@ public class DBMySQL extends BD implements DBManagment {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:"+puerto+"/"+this.database, this.user, this.password);
+                    "jdbc:mysql://localhost:"+this.puerto+"/"+this.database, this.user, this.password);
             //here sonoo is database name, root is username and password
             this.conexion = con;
 

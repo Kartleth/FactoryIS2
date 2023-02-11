@@ -22,6 +22,15 @@ public abstract class BD {
 
     public void queryInsert(String query) {
 
+        try {
+            Statement stmt = this.conexion.createStatement();
+            stmt.executeUpdate(query);
+            System.out.println("Insert ejecutado: "+query);
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
     }
 
     public void closeConnection() {
