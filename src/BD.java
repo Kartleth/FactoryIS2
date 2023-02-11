@@ -4,6 +4,8 @@ import java.sql.*;
 public abstract class BD {
     String puerto;
     String database;
+
+
     Connection conexion = null;
 
     public ResultSet querySelect(String query) {
@@ -11,10 +13,6 @@ public abstract class BD {
         try {
             Statement stmt = this.conexion.createStatement();
             rs = stmt.executeQuery(query);
-            /*
-            while (rs.next())
-                System.out.println(rs.getInt(1));
-            */
 
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -35,8 +33,7 @@ public abstract class BD {
 
     }
 
-
-    public abstract Connection connectToDB(String user, String password);
+    public abstract Connection connectToDB();
 
 
 }

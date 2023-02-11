@@ -2,21 +2,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBMySQL extends BD implements DBManagment {
-
+    private final String user;
+    private final String password;
 
     public DBMySQL(String user, String password, String database, String puerto) {
         this.database = database;
         this.puerto = puerto;
-        this.conexion = connectToDB(user, password);
+        this.user = user;
+        this.password = password;
+
+
     }
 
     @Override
-    public Connection connectToDB(String user, String password) {
+    public Connection connectToDB() {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:"+puerto+"/"+this.database, user, password);
+                    "jdbc:mysql://localhost:"+puerto+"/"+this.database, this.user, this.password);
             //here sonoo is database name, root is username and password
             this.conexion = con;
 
